@@ -1,0 +1,40 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "lazaronijunior@gmail.com",
+    "longName": "Matrix",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/matrix.png",
+                "menuIcon": true,
+                "name": "IMAGE_COVER",
+                "type": "png"
+            },
+            {
+                "characterRegex": "[0-9]",
+                "file": "fonts/Consolas2.ttf",
+                "name": "FONT_CONSOLAS_49",
+                "type": "font"
+            },
+            {
+                "file": "fonts/Consolas.ttf",
+                "name": "FONT_CONSOLAS_14",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Matrix",
+    "targetPlatforms": [
+        "basalt"
+    ],
+    "uuid": "5f7db063-28f0-4ee9-a16c-9de760c6228a",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
