@@ -25,7 +25,7 @@ static int line[X_TOTAL]; // Expresses the number of iteration till the next gap
 static int highlight_coordinates[X_TOTAL * 3];
 static const uint16_t frame_time = 1000 / FRAME_RATE;
 static GFont consolas_font, consolas_big_font;
-static uint8_t frame_count = 0;
+static int frame_count = 0;
 // 
 // In the algorythm 0 means empty and 1 means random letter
 // 
@@ -154,7 +154,7 @@ static void do_matrix_effect(){
 static void update_time(struct tm *tick_time, TimeUnits units_changed){
   time_t temp = time(NULL);
   struct tm *t = localtime(&temp);
-  snprintf(time_buffer, 7, "%d\n%d", t->tm_hour, t->tm_min);
+  snprintf(time_buffer, 7, "%02d\n%02d", t->tm_hour, t->tm_min);
   text_layer_set_text(time_txt, time_buffer);
 }
 
@@ -197,22 +197,39 @@ static void main_window_load(){
   // Create matrix_txt
   matrix_txt = text_layer_create(bounds);
   text_layer_set_background_color(matrix_txt, GColorBlack);
-  text_layer_set_text_color(matrix_txt, GColorGreen);
+  #ifdef PBL_COLOR
+    text_layer_set_text_color(matrix_txt, GColorGreen);
+  #else
+    text_layer_set_text_color(matrix_txt, GColorWhite);
+  #endif
+  
   text_layer_set_font(matrix_txt, consolas_font);
   layer_add_child(main_layer,text_layer_get_layer(matrix_txt));
-    text_layer_set_text(matrix_txt, render_buffer);
+  //text_layer_set_text(matrix_txt, render_buffer);
 
     // Crete matrix_highlight_txt
   matrix_highlight_txt = text_layer_create(bounds);
   text_layer_set_background_color(matrix_highlight_txt, GColorClear);
-  text_layer_set_text_color(matrix_highlight_txt, GColorWhite);
+  #ifdef PBL_COLOR
+    text_layer_set_text_color(matrix_highlight_txt, GColorWhite);
+  #else
+    text_layer_set_text_color(matrix_highlight_txt, GColorWhite);
+  #endif
+  
   text_layer_set_font(matrix_highlight_txt, consolas_font);
   layer_add_child(main_layer,text_layer_get_layer(matrix_highlight_txt));
   
   time_txt = text_layer_create(GRect(0,40,148,100));
   text_layer_set_background_color(time_txt, GColorClear);
-  text_layer_set_text_color(time_txt, GColorGreen);
-  text_layer_set_font(time_txt, fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
+  #ifdef PBL_COLOR
+    text_layer_set_text_color(time_txt, GColorGreen);
+    text_layer_set_font(time_txt, fonts_get_system_font(FONT_KEY_LECO_38_BOLD_NUMBERS));
+  #else
+    text_layer_set_text_color(time_txt, GColorWhite);
+    text_layer_set_font(time_txt, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
+  #endif
+  
+  
   text_layer_set_text_alignment(time_txt, GTextAlignmentCenter);
   layer_add_child(main_layer,text_layer_get_layer(time_txt));
 

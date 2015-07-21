@@ -9,7 +9,7 @@
     "resources": {
         "media": [
             {
-                "file": "images/matrix.png",
+                "file": "images/matrix_cover.png",
                 "menuIcon": true,
                 "name": "IMAGE_COVER",
                 "type": "png"
